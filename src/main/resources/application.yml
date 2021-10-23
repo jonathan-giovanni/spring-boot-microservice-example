@@ -1,8 +1,23 @@
 spring:
   application:
     name: spring-boot-microservice-example
-
+  profiles:
+    active: ${APP_PROFILE:dev}
 
 server:
   port: ${PORT:7077}
   forward-headers-strategy: framework
+
+
+#microservice information
+info:
+  component: Example microservice to expose API for handle users and publications
+  version: 1.0
+
+#actuator configuration
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
