@@ -1,6 +1,7 @@
 # spring-boot-microservice-example
 A initial Spring Boot project to deploy a functional service with:
 
+* Java 11 - Gradle project
 * REST API methods (GET,POST,etc) with [validations](https://www.baeldung.com/spring-boot-bean-validation)
 * Packages ordered by relevance
 * H2 in memory database connection
