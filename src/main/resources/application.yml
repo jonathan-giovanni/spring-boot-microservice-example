@@ -1,1 +1,8 @@
+spring:
+  application:
+    name: spring-boot-microservice-example
 
+
+server:
+  port: ${PORT:7077}
+  forward-headers-strategy: framework
