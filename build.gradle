@@ -24,7 +24,10 @@ jar {
 }
 
 dependencies {
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto
+	//logs
+	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.4'
+	//crypto
 	implementation 'org.springframework.security:spring-security-crypto:5.5.3'
 	//ModelMapper is an intelligent object mapping library that automatically maps objects to each other.
 	implementation 'org.modelmapper:modelmapper:2.4.4'
