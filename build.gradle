@@ -24,13 +24,23 @@ jar {
 }
 
 dependencies {
+	//ModelMapper is an intelligent object mapping library that automatically maps objects to each other.
+	implementation 'org.modelmapper:modelmapper:2.4.4'
+	//boot information
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	//dao access with hibernate
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//validations
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//REST API
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//skip get & set boiler plate
 	compileOnly 'org.projectlombok:lombok'
+	//in-memory database
 	runtimeOnly 'com.h2database:h2'
+	//anotation
 	annotationProcessor 'org.projectlombok:lombok'
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
