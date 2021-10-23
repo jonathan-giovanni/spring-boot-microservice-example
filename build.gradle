@@ -24,6 +24,8 @@ jar {
 }
 
 dependencies {
+	//doc api
+	implementation 'org.springdoc:springdoc-openapi-ui:1.5.12'
 	//logs
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'net.logstash.logback:logstash-logback-encoder:6.4'
