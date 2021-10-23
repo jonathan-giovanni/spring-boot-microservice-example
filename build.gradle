@@ -24,6 +24,8 @@ jar {
 }
 
 dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto
+	implementation 'org.springframework.security:spring-security-crypto:5.5.3'
 	//ModelMapper is an intelligent object mapping library that automatically maps objects to each other.
 	implementation 'org.modelmapper:modelmapper:2.4.4'
 	//boot information
@@ -40,6 +42,10 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	//anotation
 	annotationProcessor 'org.projectlombok:lombok'
+	//hot reload
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	//compilation helps
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
