@@ -1,7 +1,6 @@
 package com.hv.example.microservice.dao.entity;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,13 +29,14 @@ public class UserEntity implements Serializable {
     @NotNull
     @Size(min = 1, max = 250)
     @Column(name = "password")
+    @ToString.Exclude
     private String password;
 
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
 
     @Basic(optional = false)
@@ -44,9 +44,8 @@ public class UserEntity implements Serializable {
     @Column(name = "enabled")
     private boolean enabled;
 
-    @CreationTimestamp
-    @Column(name="created_at", nullable = false, updatable = false, insertable = false)
-    @Setter(AccessLevel.NONE)
+    @Column(name = "created_at",updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     /** constructor with args **/
