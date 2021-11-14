@@ -2,6 +2,8 @@ package com.hv.example.microservice.repository;
 
 import com.hv.example.microservice.dao.entity.UserEntity;
 import com.hv.example.microservice.dao.repository.UserRepository;
+import com.hv.example.microservice.dao.spec.UserSpecification;
+import com.hv.example.microservice.domain.user.dto.UserFilterDto;
 import com.hv.example.microservice.util.AppUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.Random;
 
 
 @SpringBootTest
@@ -23,38 +26,18 @@ public class UserRepositoryTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private static boolean initialized = false;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserSpecification userSpecification;
 
-    /**
-     * Init data just one time
-     */
-    @PostConstruct
-    public void initData(){
-        if(initialized) return;
-        log.info(AppUtil.getMethodWithClass());
-        for(int i=0;i<10;i++){
-            var userEntity = new UserEntity(AppUtil.generateId());
-            userEntity.setEmail(userEntity.getUsername()+"@example.com");
-            userEntity.setEnabled(true);
-            userEntity.setCreatedAt(new Date());
-            //encoding using bcrypt
-            userEntity.setPassword(new BCryptPasswordEncoder().encode("pass"+i));
-
-            //saving
-            userRepository.save(userEntity);
-        }
-        initialized = true;
-    }
 
     @Test
     void Test_01_FindAllUsers() {
         log.info(AppUtil.getMethodWithClass());
 
         log.info("Actors: {}",userRepository.count());
-        userRepository.findAll().forEach(actorEntity -> log.info(actorEntity.toString()));
+        userRepository.findAll().forEach(userEntity -> log.info(userEntity.toString()));
 
         Assertions.assertTrue(true);
     }
@@ -68,7 +51,8 @@ public class UserRepositoryTest {
         log.info("Users before save: {}",userRepository.count());
 
         var userEntity = new UserEntity(AppUtil.generateId());
-        userEntity.setEmail(userEntity.getUsername()+"@example.com");
+        userEntity.setName("jonathan");
+        userEntity.setEmail(userEntity.getName()+"@example.com");
         userEntity.setEnabled(true);
         userEntity.setCreatedAt(new Date());
         //encoding using bcrypt
@@ -79,13 +63,22 @@ public class UserRepositoryTest {
         //log count records after save
         log.info("Users after  save: {}",userRepository.count());
 
-        var userResult = userRepository.findById(userEntity.getUsername());
+        var userResult = userRepository.findById(userEntity.getId());
         if(userResult.isPresent()){
             log.info("FOUND: {}",userResult.get());
         }else{
             Assertions.fail();
         }
+    }
 
+
+    @Test
+    void Test_03_SearchByCriteria(){
+        log.info(AppUtil.getMethodWithClass());
+        var filterDto = new UserFilterDto();
+        filterDto.setFilter("jon");
+
+        userRepository.findAll(userSpecification.filter(filterDto)).forEach(user -> log.info(user.toString()));
     }
 
 

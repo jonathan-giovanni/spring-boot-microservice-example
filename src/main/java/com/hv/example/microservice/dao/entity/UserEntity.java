@@ -21,9 +21,15 @@ public class UserEntity implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "username")
+    @Column(name = "id")
     @EqualsAndHashCode.Include
-    private String username;
+    private String id;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "name")
+    private String name;
 
     @Basic(optional = false)
     @NotNull
@@ -50,7 +56,7 @@ public class UserEntity implements Serializable {
 
     /** constructor with args **/
 
-    public UserEntity(@NotNull @Size(min = 1, max = 100) String username) {
-        this.username = username;
+    public UserEntity(@NotNull @Size(min = 1, max = 100) String id) {
+        this.id = id;
     }
 }

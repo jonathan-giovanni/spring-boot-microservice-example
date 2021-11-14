@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.Random;
 
 @Configuration
 @Slf4j
@@ -29,14 +30,14 @@ public class InitDataConfig {
     public void initData(){
         if(initialized) return;
         log.info(AppUtil.getMethodWithClass());
-        for(int i=0;i<10;i++){
+        for(int i=0;i<20;i++){
             var userEntity = new UserEntity(AppUtil.generateId());
-            userEntity.setEmail(userEntity.getUsername()+"@example.com");
+            userEntity.setName((new String[]{"jonathan", "jony","giovanni","jessica","jeniffer","tania","bob","eduard","richard"})[new Random().nextInt(8)]+i);
+            userEntity.setEmail(userEntity.getName()+(new Random().nextInt(200))+"@example.com");
             userEntity.setEnabled(true);
             userEntity.setCreatedAt(new Date());
             //encoding using bcrypt
             userEntity.setPassword(new BCryptPasswordEncoder().encode("pass"+i));
-
             //saving
             userRepository.save(userEntity);
         }

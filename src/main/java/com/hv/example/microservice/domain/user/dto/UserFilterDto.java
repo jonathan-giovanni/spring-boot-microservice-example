@@ -8,15 +8,17 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Getter @Setter @NoArgsConstructor
-@ToString
-public class UserDto {
 
-    private String id;
-    private String name;
-    private String email;
-    private boolean enabled;
-    private Date createdAt;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class UserFilterDto {
+
+    private String filter;
+    private Date fromDate;
+    private Date toDate;
+    private Boolean enabled;
 
 }
