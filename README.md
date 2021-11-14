@@ -12,4 +12,5 @@ A initial Spring Boot project to deploy a functional service with:
 * Error/Exception handling with [@ControllerAdvice](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)
 * Configuration with YAML
 * Custom Exception with codes and descriptions
-* List with pagination
+* List with [Spring Pagination](https://www.baeldung.com/spring-data-jpa-pagination-sorting)
+* Query filters with [Spring Data Criteria](https://www.baeldung.com/spring-data-criteria-queries) 
